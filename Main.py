@@ -19,7 +19,7 @@ def encrypt_message(receiver_pk_file, message):
 
     # Generate AES key
     aes_key = get_random_bytes(16)  # AES-128
-    cipher_aes = AES.new(aes_key, AES.MODE_EAX)
+    cipher_aes = AES.new(aes_key, AES.MODE_GCM)
     ciphertext, tag = cipher_aes.encrypt_and_digest(message.encode())
 
     # Encrypt AES key with RSA
@@ -56,7 +56,7 @@ def decrypt_message(private_key_file):
     aes_key = cipher_rsa.decrypt(enc_aes_key)
 
     # Decrypt message
-    cipher_aes = AES.new(aes_key, AES.MODE_EAX, nonce)
+    cipher_aes = AES.new(aes_key, AES.MODE_GCM, nonce)
     message = cipher_aes.decrypt_and_verify(ciphertext, tag)
 
     # Verify MAC

@@ -80,11 +80,11 @@ def main():
     generate_keys(sender_sk, sender_pk)
     generate_keys(receiver_sk, receiver_pk)
     
-    # encrypt and send
+    # Encrypt and send
     message = 'Uni is very cute'
     encrypt_message(receiver_pk, message)
     
-    # decrypt and read
+    # Decrypt and read
     decrypt_message(receiver_sk)
 
 if __name__ == "__main__":
